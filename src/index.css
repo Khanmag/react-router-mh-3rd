@@ -54,3 +54,7 @@ header a.active {
   border-radius: 10px;
   border: 1px solid black;
 }
+.black_border {
+  color: gold;
+  font-size: 150%;
+}

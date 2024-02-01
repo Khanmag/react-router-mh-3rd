@@ -1,4 +1,4 @@
-import { Link, Route, Routes } from "react-router-dom"
+import { Link, NavLink, Route, Routes } from "react-router-dom"
 import IncomePage from './pages/IncomePage'
 import ExpensesPage from './pages/ExpensesPage'
 import NotFoundPage from './pages/NotFoundPage'
@@ -19,10 +19,10 @@ function App() {
         </Route>
       </Routes> */}
       <header>
-        <Link to="/">home</Link>
-        <Link to="/income">income</Link>
-        <Link to="/expenses">expenses</Link>
-        <Link to="/posts">posts</Link>
+        <NavLink className={({isActive}) => isActive ? "black_border" : ""} to="/">home</NavLink>
+        <NavLink to="/income">income</NavLink>
+        <NavLink to="/expenses">expenses</NavLink>
+        <NavLink to="/posts">posts</NavLink>
       </header>
       <main>
         <Routes>

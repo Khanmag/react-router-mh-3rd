@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const OnePostPage = () => {
   const params = useParams()
+  const navigate = useNavigate()
   // {id: }
   const [postData, setPostData] = useState(null)
   useEffect(() => {
@@ -23,6 +24,7 @@ const OnePostPage = () => {
   console.log();
   return (
     <div>
+      <button onClick={() => {navigate(-1)}}>back</button>
       {postData
         ? (
           <>
