@@ -1,10 +1,10 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { useEffect, useState } from "react";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth"
 import { emailValidator } from "../utils/validators";
 import { auth } from "../firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { logIn } from "../store/auth/authSlice";
+import { logIn, logOut } from "../store/auth/authSlice";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("")
@@ -21,9 +21,24 @@ const LoginPage = () => {
           email: data.user.email,
           id: data.user.uid,
         }))
+        localStorage.setItem("email", data.user.email)
+        localStorage.setItem("id", data.user.uid)
       })
       .catch(console.error)
   }
+
+  const handleLogOut = () => {
+    signOut(auth)
+    dispatch(logOut())
+    localStorage.removeItem("email")
+    localStorage.removeItem("id")
+  }
+
+  useEffect(() => {
+    const email = localStorage.getItem("email")
+    const id = localStorage.getItem("id")
+    dispatch(logIn({ email, id }))
+  }, [dispatch])
   return (
     <div>
       <Box>
@@ -53,6 +68,7 @@ const LoginPage = () => {
             </>
           )
         }
+        <Button variant="contained" color="error" onClick={handleLogOut}>Log Out</Button>
       </Box>
 
     </div>
