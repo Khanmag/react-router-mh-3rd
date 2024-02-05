@@ -14,12 +14,13 @@ header {
   align-items: center;
   gap: 2rem;
 }
+
 main {
   min-height: calc(100vh - 130px);
   max-width: 1200px;
   margin: 0 auto;
-  background-color: lightgray;
 }
+
 footer {
   max-width: 1200px;
   margin: 0 auto;
@@ -49,11 +50,13 @@ header a:after {
 header a:hover:after {
   width: 100%;
 }
+
 header a.active {
   padding: 5px;
   border-radius: 10px;
   border: 1px solid black;
 }
+
 .black_border {
   color: gold;
   font-size: 150%;
