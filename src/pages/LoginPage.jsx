@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth"
 import { emailValidator } from "../utils/validators";
 import { auth } from "../firebase";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,6 +32,20 @@ const LoginPage = () => {
     dispatch(logOut())
     localStorage.removeItem("email")
     localStorage.removeItem("id")
+  }
+
+  const handleRegist = () => {
+    createUserWithEmailAndPassword(auth, email, pass)
+      .then(data => {
+        console.log(data);
+        dispatch(logIn({
+          email: data.user.email,
+          id: data.user.uid,
+        }))
+        localStorage.setItem("email", data.user.email)
+        localStorage.setItem("id", data.user.uid)
+      })
+      .catch(console.error)
   }
 
   useEffect(() => {
@@ -68,7 +82,9 @@ const LoginPage = () => {
             </>
           )
         }
+        <Button variant="contained" color="success" onClick={handleRegist}>Regist</Button>
         <Button variant="contained" color="error" onClick={handleLogOut}>Log Out</Button>
+
       </Box>
 
     </div>
